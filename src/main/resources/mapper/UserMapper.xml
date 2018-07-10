@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.UserMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.User" parameterType="com.adsion.bean.SeachUser">
+        select * from users LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.User">
+        insert into users (name,password,sex,birthday,status,role_id)
+        values(#{name},#{password},#{sex},#{birthday},#{status},#{role_id})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from users where id=#{id}
+    </delete>
+
+    <select id="seachUser" resultType="com.adsion.bean.User" parameterType="com.adsion.bean.SeachUser">
+        select * from users
+        <where>
+            <if test="sex !=''">
+                and sex = #{sex}
+            </if>
+            <if test="birthday_start != '' and birthday_end !=''">
+                and
+            </if>
+            <if test="name !=''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="status!=0">
+                and status = #{status}
+            </if>
+            <if test="role_id!=0">
+                and role_id = #{role_id}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+    <update id="updateUser" parameterType="com.adsion.bean.User">
+        update users set
+        <if test="name!=''">
+            name = #{name},
+        </if>
+        <if test="status!=''">
+            status = #{status},
+        </if>
+        <if test="role_id!=null">
+            role_id = #{role_id}
+        </if>
+        where id = #{id}
+    </update>
+
+    <select id="findName" resultType="com.adsion.bean.User" parameterType="com.adsion.bean.User">
+        select * from users where name = #{name}
+    </select>
+
+    <select id="findAll" resultType="com.adsion.bean.User">
+        select * from users where status = '1'
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.LogMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.Log" parameterType="com.adsion.bean.SeachLog">
+        select * from logs LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.Log">
+        insert into logs (title,description,cust_id,create_time)
+        values(#{title},#{description},#{cust_id},#{create_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from logs where id=#{id}
+    </delete>
+
+    <select id="seachLog" resultType="com.adsion.bean.Log" parameterType="com.adsion.bean.SeachLog">
+        select * from logs
+        <where>
+            <if test="title !=''">
+                and title like CONCAT('%', #{title}, '%')
+            </if>
+            <if test="create_time_start != '' and create_time_end !=''">
+                and create_time &gt;= #{create_time_start} AND  create_time &lt;= #{create_time_end}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+</mapper>

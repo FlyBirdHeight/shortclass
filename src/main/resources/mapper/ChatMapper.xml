@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.ChatMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.Chat" parameterType="com.adsion.bean.SeachChat">
+        select * from contacts LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.Chat">
+        insert into contacts (cust_id,name,dept,position,telephone,mobile,email,qq,degree,info,create_time)
+        values(#{cust_id},#{name},#{dept},#{position},#{telephone},#{mobile},#{email},#{qq},#{degree},#{info},#{create_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from contacts where id=#{id}
+    </delete>
+
+    <select id="seachChat" resultType="com.adsion.bean.Chat" parameterType="com.adsion.bean.SeachChat">
+        select* from contacts
+        <where>
+            <if test="name !=''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="create_time_start != '' and create_time_end !=''">
+                and create_time &gt;= #{create_time_start} AND create_time &lt;= #{create_time_end}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+</mapper>

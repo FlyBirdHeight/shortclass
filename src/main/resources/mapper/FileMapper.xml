@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.FileMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.File" parameterType="com.adsion.bean.SeachFile">
+        select * from files LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.File">
+        insert into files (cust_id,title,description,type,url,create_time)
+        values(#{cust_id},#{title},#{description},#{type},#{url},#{create_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from files where id=#{id}
+    </delete>
+
+    <select id="seachFile" resultType="com.adsion.bean.File" parameterType="com.adsion.bean.SeachFile">
+        select * from files
+        <where>
+            <if test="cust_id !=0">
+                and cust_id = #{cust_id}
+            </if>
+            <if test="title!=''">
+                and title like CONCAT('%', #{title}, '%')
+            </if>
+            <if test="type!=''">
+                and type = #{type}
+            </if>
+            <if test="create_time_start != '' and create_time_end !=''">
+                and create_time &gt;= #{create_time_start} AND create_time &lt;= #{create_time_end}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.CustorMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.Custor" parameterType="com.adsion.bean.SeachCustor">
+        select * from custors LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.Custor">
+        insert into custors (name,type,background,listed,reg_capital,year_sales,entp_scale,tester_no,url,zip_code,address,main_products,major_services,status,user_id,create_time)
+        values(#{name},#{type},#{background},#{listed},#{reg_capital},#{year_sales},#{entp_scale},#{tester_no},#{url},#{zip_code},#{address},#{main_products},#{major_services},#{status},#{user_id},#{create_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from custors where id=#{id}
+    </delete>
+
+    <select id="seachCustor" resultType="com.adsion.bean.Custor" parameterType="com.adsion.bean.SeachCustor">
+        select * from custors
+        <where>
+            <if test="name !=''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="background!=''">
+                and background = #{background}
+            </if>
+            <if test="listed!=''">
+                and listed = #{listed}
+            </if>
+            <if test="type!=''">
+                and type = #{type}
+            </if>
+            <if test="status!=''">
+                and status = #{status}
+            </if>
+            <if test="user_id!=0">
+                and user_id = #{user_id}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+
+    <update id="updateCustor" parameterType="com.adsion.bean.Custor">
+        update custors set
+        user_id = #{user_id}
+        where id = #{id}
+    </update>
+
+    <select id="findAll" resultType="com.adsion.bean.Custor">
+        select * from custors
+    </select>
+</mapper>

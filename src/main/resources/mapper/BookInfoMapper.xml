@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.adsion.mapper.BookInfoMapper">
+
+    <select id="getAll" resultType="com.adsion.bean.BookInfo" parameterType="com.adsion.bean.SeachBook">
+        select * from bookinfos LIMIT #{offset},#{limit}
+    </select>
+
+    <insert id="insert" parameterType="com.adsion.bean.BookInfo">
+        insert into bookinfos (title,description,book_time,create_time)
+        values(#{title},#{description},#{book_time},#{create_time})
+    </insert>
+
+    <delete id="deleteById" parameterType="int">
+        delete from bookinfos where id=#{id}
+    </delete>
+
+    <select id="seachBook" resultType="com.adsion.bean.BookInfo" parameterType="com.adsion.bean.SeachBook">
+        select * from bookinfos
+        <where>
+            <if test="title !=''">
+                 and title = #{title}
+            </if>
+            <if test="book_time_start != '' and book_time_end !=''">
+                and book_time &gt;= #{book_time_start} AND create_time &lt;= #{book_time_end}
+            </if>
+        </where>
+        LIMIT #{offset},#{limit}
+    </select>
+</mapper>
