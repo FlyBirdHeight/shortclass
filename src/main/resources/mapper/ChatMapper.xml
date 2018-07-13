@@ -18,7 +18,7 @@
     </delete>
 
     <select id="seachChat" resultType="com.adsion.bean.Chat" parameterType="com.adsion.bean.SeachChat">
-        select* from contacts
+        select * from contacts
         <where>
             <if test="name !=''">
                 and name like CONCAT('%', #{name}, '%')
@@ -28,6 +28,18 @@
             </if>
         </where>
         LIMIT #{offset},#{limit}
+    </select>
+
+    <select id="seachChatCount" resultType="int" parameterType="com.adsion.bean.SeachChat">
+        select count(*) from contacts
+        <where>
+            <if test="name !=''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="create_time_start != '' and create_time_end !=''">
+                and create_time &gt;= #{create_time_start} AND create_time &lt;= #{create_time_end}
+            </if>
+        </where>
     </select>
 
 </mapper>

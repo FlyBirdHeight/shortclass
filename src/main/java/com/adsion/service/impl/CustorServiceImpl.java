@@ -97,4 +97,30 @@ public class CustorServiceImpl implements CustorService {
             return null;
         }
     }
+
+    @Override
+    public int seachCustorCount(SeachCustor seachCustor) throws Exception {
+        try{
+            int custors = custorMapper.seachCustorCount(seachCustor);
+            return custors;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public Custor getById(int id) throws Exception {
+        try{
+            Custor custor = custorMapper.getById(id);
+            if (custor!=null){
+                return custor;
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

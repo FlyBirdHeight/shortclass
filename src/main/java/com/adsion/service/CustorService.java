@@ -17,4 +17,8 @@ public interface CustorService {
     boolean updateCustor(Custor custor) throws Exception;
 
     List<Custor> findAll() throws Exception;
+
+    int seachCustorCount(SeachCustor seachCustor) throws Exception;
+
+    Custor getById(int id) throws Exception;
 }

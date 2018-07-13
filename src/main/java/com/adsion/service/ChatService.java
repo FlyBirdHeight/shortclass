@@ -13,4 +13,6 @@ public interface ChatService {
     boolean deleteById(int[] chats) throws Exception;
 
     List<Chat> seachChat(SeachChat seachChat) throws Exception;
+
+    int seachChatCount(SeachChat seachChat) throws Exception;
 }

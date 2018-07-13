@@ -86,4 +86,15 @@ public class FileServiceImpl implements FileService {
             return null;
         }
     }
+
+    @Override
+    public int seachFileCount(SeachFile seachFile) throws Exception {
+        try{
+            int files = fileMapper.seachFileCount(seachFile);
+            return files;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

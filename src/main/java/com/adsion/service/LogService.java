@@ -13,4 +13,6 @@ public interface LogService {
     boolean deleteById(int[] logs) throws Exception;
 
     List<Log> seachLog(SeachLog seachLog) throws Exception;
+
+    int seachLogCount(SeachLog seachLog) throws Exception;
 }

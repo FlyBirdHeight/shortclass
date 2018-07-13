@@ -80,10 +80,11 @@ public class UserController {
     @RequestMapping(value = "/get",method = RequestMethod.POST)
     public Message updateRole(@RequestBody SeachUser seachUser){
         try{
-            System.out.println(seachUser);
             List<User> users = userService.seachUser(seachUser);
-            System.out.println(users);
-            return new Message(1,"SUCCESS",users);
+            int count = userService.seachUserCount(seachUser);
+            Message message = new Message(1,"SUCCESS",users);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

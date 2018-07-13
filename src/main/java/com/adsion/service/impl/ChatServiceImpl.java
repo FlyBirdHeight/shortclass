@@ -71,4 +71,15 @@ public class ChatServiceImpl implements ChatService {
             return null;
         }
     }
+
+    @Override
+    public int seachChatCount(SeachChat seachChat) throws Exception {
+        try{
+            int chats = chatMapper.seachChatCount(seachChat);
+            return chats;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }

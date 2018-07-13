@@ -11,6 +11,7 @@ public class User {
     private String status;
     private int role_id;
     private Role role;
+    private int count;
 
     @Override
     public String toString() {
@@ -19,11 +20,20 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", sex='" + sex + '\'' +
-                ", birthday=" + birthday +
+                ", birthday='" + birthday + '\'' +
                 ", status='" + status + '\'' +
                 ", role_id=" + role_id +
                 ", role=" + role +
+                ", count=" + count +
                 '}';
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {

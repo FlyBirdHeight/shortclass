@@ -29,4 +29,16 @@
         </where>
         LIMIT #{offset},#{limit}
     </select>
+
+    <select id="seachBookCount" resultType="int" parameterType="com.adsion.bean.SeachBook">
+        select count(*) from bookinfos
+        <where>
+            <if test="title !=''">
+                and title = #{title}
+            </if>
+            <if test="book_time_start != '' and book_time_end !=''">
+                and book_time &gt;= #{book_time_start} AND create_time &lt;= #{book_time_end}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -13,4 +13,6 @@ public interface BookInfoService {
     boolean deleteById(int[] bookInfos) throws Exception;
 
     List<BookInfo> seachBook(SeachBook seachBook) throws Exception;
+
+    int seachBookCount(SeachBook seachBook) throws Exception;
 }

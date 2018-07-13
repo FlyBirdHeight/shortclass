@@ -7,13 +7,23 @@ public class Message {
     public static int SUCCESS = 1;
     public static int ERROR = 0;
     private int status;
+    private int count;
     private String message;
     private Object result;
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     /**
      * sdadasd
      * @return
      */
+
 
     public int getStatus() {
         return status;
@@ -49,6 +59,7 @@ public class Message {
     public String toString() {
         return "Message{" +
                 "status=" + status +
+                ", count=" + count +
                 ", message='" + message + '\'' +
                 ", result=" + result +
                 '}';

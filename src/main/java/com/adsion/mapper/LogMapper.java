@@ -16,4 +16,5 @@ public interface LogMapper {
 
     List<Log> seachLog(SeachLog seachLog) throws Exception;
 
+    int seachLogCount(SeachLog seachLog) throws Exception;
 }

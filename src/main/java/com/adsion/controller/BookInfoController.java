@@ -61,8 +61,10 @@ public class BookInfoController {
     public Message updateRole(@RequestBody SeachBook seachBook){
         try{
             List<BookInfo> bookInfos = bookInfoService.seachBook(seachBook);
-            System.out.println(bookInfos);
-            return new Message(1,"SUCCESS",bookInfos);
+            int count = bookInfoService.seachBookCount(seachBook);
+            Message message = new Message(1,"SUCCESS",bookInfos);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

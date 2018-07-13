@@ -6,6 +6,7 @@ public class BookInfo {
     private String description;
     private String book_time;
     private String create_time;
+    private int count;
 
     @Override
     public String toString() {
@@ -15,7 +16,16 @@ public class BookInfo {
                 ", description='" + description + '\'' +
                 ", book_time='" + book_time + '\'' +
                 ", create_time='" + create_time + '\'' +
+                ", count=" + count +
                 '}';
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {

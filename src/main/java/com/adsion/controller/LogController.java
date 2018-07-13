@@ -1,8 +1,10 @@
 package com.adsion.controller;
 
+import com.adsion.bean.Custor;
 import com.adsion.bean.Log;
 import com.adsion.bean.Message;
 import com.adsion.bean.SeachLog;
+import com.adsion.service.CustorService;
 import com.adsion.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +19,8 @@ import java.util.List;
 public class LogController {
     @Autowired
     private LogService logService;
-
+    @Autowired
+    private CustorService custorService;
     @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public Message getAll(@RequestBody SeachLog seachLog){
         try{
@@ -61,8 +64,14 @@ public class LogController {
     public Message get(@RequestBody SeachLog seachLog){
         try{
             List<Log> logs = logService.seachLog(seachLog);
-            System.out.println(logs);
-            return new Message(1,"SUCCESS",logs);
+            int count = logService.seachLogCount(seachLog);
+            for (Log log:logs){
+                Custor custor = custorService.getById(log.getCust_id());
+                log.setCust_name(custor.getName());
+            }
+            Message message = new Message(1,"SUCCESS",logs);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

@@ -14,6 +14,8 @@ public class Chat {
     private String degree;
     private String info;
     private String create_time;
+    private String cust_bame;
+    private int count;
 
     @Override
     public String toString() {
@@ -31,7 +33,25 @@ public class Chat {
                 ", degree='" + degree + '\'' +
                 ", info='" + info + '\'' +
                 ", create_time='" + create_time + '\'' +
+                ", cust_bame='" + cust_bame + '\'' +
+                ", count=" + count +
                 '}';
+    }
+
+    public String getCust_bame() {
+        return cust_bame;
+    }
+
+    public void setCust_bame(String cust_bame) {
+        this.cust_bame = cust_bame;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {

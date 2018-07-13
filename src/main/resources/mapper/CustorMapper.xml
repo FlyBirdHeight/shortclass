@@ -5,7 +5,7 @@
 <mapper namespace="com.adsion.mapper.CustorMapper">
 
     <select id="getAll" resultType="com.adsion.bean.Custor" parameterType="com.adsion.bean.SeachCustor">
-        select * from custors LIMIT #{offset},#{limit}
+        select count(*),* from custors LIMIT #{offset},#{limit}
     </select>
 
     <insert id="insert" parameterType="com.adsion.bean.Custor">
@@ -42,6 +42,30 @@
         LIMIT #{offset},#{limit}
     </select>
 
+    <select id="seachCustorCount" resultType="int" parameterType="com.adsion.bean.SeachCustor">
+        select count(*) from custors
+        <where>
+            <if test="name !=''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+            <if test="background!=''">
+                and background = #{background}
+            </if>
+            <if test="listed!=''">
+                and listed = #{listed}
+            </if>
+            <if test="type!=''">
+                and type = #{type}
+            </if>
+            <if test="status!=''">
+                and status = #{status}
+            </if>
+            <if test="user_id!=0">
+                and user_id = #{user_id}
+            </if>
+        </where>
+    </select>
+
     <update id="updateCustor" parameterType="com.adsion.bean.Custor">
         update custors set
         user_id = #{user_id}
@@ -50,5 +74,9 @@
 
     <select id="findAll" resultType="com.adsion.bean.Custor">
         select * from custors
+    </select>
+
+    <select id="getById" resultType="com.adsion.bean.Custor" parameterType="int">
+        select * from custors where id = #{id}
     </select>
 </mapper>

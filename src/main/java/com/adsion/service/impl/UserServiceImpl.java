@@ -140,4 +140,30 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public int seachUserCount(SeachUser seachUser) throws Exception {
+        try{
+            int users = userMapper.seachUserCount(seachUser);
+            return users;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    @Override
+    public User getById(int id) throws Exception {
+        try{
+            User user = userMapper.getById(id);
+            if (user!=null){
+                return user;
+            }else{
+                return null;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

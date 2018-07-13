@@ -72,5 +72,16 @@ public class BookInfoServiceImpl implements BookInfoService {
             return null;
         }
     }
+
+    @Override
+    public int seachBookCount(SeachBook seachBook) throws Exception {
+        try{
+            int bookInfos = bookInfoMapper.seachBookCount(seachBook);
+            return bookInfos;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
 }
 

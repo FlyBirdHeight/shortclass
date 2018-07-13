@@ -3,7 +3,9 @@ package com.adsion.controller;
 import com.adsion.bean.Custor;
 import com.adsion.bean.Message;
 import com.adsion.bean.SeachCustor;
+import com.adsion.bean.User;
 import com.adsion.service.CustorService;
+import com.adsion.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import java.util.List;
 public class CustorController {
     @Autowired
     private CustorService custorService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public Message getAll(@RequestBody SeachCustor seachCustor){
@@ -61,8 +65,14 @@ public class CustorController {
     public Message get(@RequestBody SeachCustor seachCustor){
         try{
             List<Custor> custors = custorService.seachCustor(seachCustor);
-            System.out.println(custors);
-            return new Message(1,"SUCCESS",custors);
+            for (Custor custor: custors){
+                User user = userService.getById(custor.getUser_id());
+                custor.setUser_name(user.getName());
+            }
+            int count = custorService.seachCustorCount(seachCustor);
+            Message message = new Message(1,"SUCCESS",custors);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

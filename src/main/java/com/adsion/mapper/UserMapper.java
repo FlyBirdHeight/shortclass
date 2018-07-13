@@ -21,4 +21,8 @@ public interface UserMapper {
     User findName(User user) throws Exception;
 
     List<User> findAll() throws Exception;
+
+    int seachUserCount(SeachUser seachUser) throws Exception;
+
+    User getById(int id) throws Exception;
 }

@@ -21,6 +21,8 @@ public class Custor {
     private int user_id;
     private User user;
     private String create_time;
+    private String user_name;
+    private int count;
 
     @Override
     public String toString() {
@@ -42,8 +44,26 @@ public class Custor {
                 ", status='" + status + '\'' +
                 ", user_id=" + user_id +
                 ", user=" + user +
-                ", create_time=" + create_time +
+                ", create_time='" + create_time + '\'' +
+                ", user_name='" + user_name + '\'' +
+                ", count=" + count +
                 '}';
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getId() {

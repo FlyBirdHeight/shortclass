@@ -23,4 +23,8 @@ public interface UserService {
     List<User> findAll() throws Exception;
 
     Message login(User user);
+
+    int seachUserCount(SeachUser seachUser) throws Exception;
+
+    User getById(int id) throws Exception;
 }

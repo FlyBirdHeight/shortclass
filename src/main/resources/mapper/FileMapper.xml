@@ -36,4 +36,22 @@
         LIMIT #{offset},#{limit}
     </select>
 
+    <select id="seachFileCount" resultType="int" parameterType="com.adsion.bean.SeachFile">
+        select count(*) from files
+        <where>
+            <if test="cust_id !=0">
+                and cust_id = #{cust_id}
+            </if>
+            <if test="title!=''">
+                and title like CONCAT('%', #{title}, '%')
+            </if>
+            <if test="type!=''">
+                and type = #{type}
+            </if>
+            <if test="create_time_start != '' and create_time_end !=''">
+                and create_time &gt;= #{create_time_start} AND create_time &lt;= #{create_time_end}
+            </if>
+        </where>
+    </select>
+
 </mapper>

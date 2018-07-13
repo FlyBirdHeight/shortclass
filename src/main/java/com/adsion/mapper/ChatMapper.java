@@ -15,4 +15,6 @@ public interface ChatMapper {
     void deleteById(int id) throws Exception;
 
     List<Chat> seachChat(SeachChat seachChat) throws Exception;
+
+    int seachChatCount(SeachChat seachChat) throws Exception;
 }

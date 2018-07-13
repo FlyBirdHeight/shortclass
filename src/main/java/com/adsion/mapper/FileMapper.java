@@ -18,4 +18,6 @@ public interface FileMapper {
     List<File> seachFile(SeachFile seachFile) throws Exception;
 
     File getById(int id) throws Exception;
+
+    int seachFileCount(SeachFile seachFile) throws Exception;
 }

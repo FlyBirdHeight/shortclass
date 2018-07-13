@@ -71,4 +71,16 @@ public class LogServiceImpl implements LogService {
             return null;
         }
     }
+
+    @Override
+    public int seachLogCount(SeachLog seachLog) throws Exception {
+        try{
+            int logs = logMapper.seachLogCount(seachLog);
+            return logs;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+
+    }
 }

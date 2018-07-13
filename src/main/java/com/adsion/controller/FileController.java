@@ -1,9 +1,7 @@
 package com.adsion.controller;
 
-import com.adsion.bean.BookInfo;
-import com.adsion.bean.File;
-import com.adsion.bean.Message;
-import com.adsion.bean.SeachFile;
+import com.adsion.bean.*;
+import com.adsion.service.CustorService;
 import com.adsion.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +13,8 @@ import java.util.List;
 public class FileController {
     @Autowired
     private FileService fileService;
+    @Autowired
+    private CustorService custorService;
 
     @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public Message getAll(@RequestBody SeachFile seachFile){
@@ -61,8 +61,14 @@ public class FileController {
         System.out.println(seachFile.toString());
         try{
             List<File> files = fileService.seachFile(seachFile);
-            System.out.println(files);
-            return new Message(1,"SUCCESS",files);
+            int count = fileService.seachFileCount(seachFile);
+            for (File file:files){
+                Custor custor = custorService.getById(file.getCust_id());
+                file.setCust_name(custor.getName());
+            }
+            Message message = new Message(1,"SUCCESS",files);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

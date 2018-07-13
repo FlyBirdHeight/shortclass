@@ -16,4 +16,6 @@ public interface BookInfoMapper {
     void deleteById(int id) throws Exception;
 
     List<BookInfo> seachBook(SeachBook seachBook) throws Exception;
+
+    int seachBookCount(SeachBook seachBook) throws Exception;
 }

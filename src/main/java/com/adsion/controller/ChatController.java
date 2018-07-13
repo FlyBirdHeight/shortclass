@@ -1,9 +1,11 @@
 package com.adsion.controller;
 
 import com.adsion.bean.Chat;
+import com.adsion.bean.Custor;
 import com.adsion.bean.Message;
 import com.adsion.bean.SeachChat;
 import com.adsion.service.ChatService;
+import com.adsion.service.CustorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import java.util.List;
 public class ChatController {
     @Autowired
     private ChatService chatService;
+    @Autowired
+    private CustorService custorService;
 
     @RequestMapping(value = "/getAll",method = RequestMethod.POST)
     public Message getAll(@RequestBody SeachChat seachChat){
@@ -60,9 +64,16 @@ public class ChatController {
     @RequestMapping(value = "/get",method = RequestMethod.POST)
     public Message updateRole(@RequestBody SeachChat seachChat){
         try{
+            System.out.println(seachChat.toString());
             List<Chat> chats = chatService.seachChat(seachChat);
-            System.out.println(chats);
-            return new Message(1,"SUCCESS",chats);
+            int count = chatService.seachChatCount(seachChat);
+            for (Chat chat: chats){
+                Custor custor = custorService.getById(chat.getCust_id());
+                chat.setCust_bame(custor.getName());
+            }
+            Message message = new Message(1,"SUCCESS",chats);
+            message.setCount(count);
+            return message;
         }catch (Exception e){
             return new Message(0,"ERROR",null);
         }

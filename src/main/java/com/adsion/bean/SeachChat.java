@@ -10,6 +10,19 @@ public class SeachChat {
     private String create_time_start;
     private String create_time_end;
 
+    @Override
+    public String toString() {
+        return "SeachChat{" +
+                "offset=" + offset +
+                ", limit=" + limit +
+                ", size=" + size +
+                ", total=" + total +
+                ", name='" + name + '\'' +
+                ", create_time_start='" + create_time_start + '\'' +
+                ", create_time_end='" + create_time_end + '\'' +
+                '}';
+    }
+
     public int getOffset() {
         return offset;
     }
